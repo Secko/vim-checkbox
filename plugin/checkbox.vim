@@ -1,7 +1,7 @@
 " ****************************************************************************
 " File:             checkbox.vim
 " Author:           Jonas Kramer
-" Version:          0.1
+" Version:          0.1.2
 " Last Modified:    2010-06-01
 " Copyright:        Copyright (C) 2010 by Jonas Kramer. Published under the
 "                   terms of the Artistic License 2.0.
@@ -19,7 +19,9 @@ endif
 fu! checkbox#ToggleCB()
 	let line = getline('.')
 
-	if(match(line, "\\[ \\]") != -1)
+	if(match(line, ".") != -1 && match(line, "\\[ \\]") == -1 && match(line, "\\[x\\]") == -1)
+		let line = substitute(line, "", "[ ]", "")
+	elseif(match(line, "\\[ \\]") != -1)
 		let line = substitute(line, "\\[ \\]", "[x]", "")
 	elseif(match(line, "\\[x\\]") != -1)
 		let line = substitute(line, "\\[x\\]", "[ ]", "")
